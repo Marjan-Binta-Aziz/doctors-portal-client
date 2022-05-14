@@ -17,12 +17,11 @@ const SignUp = () => {
 
     let errorElement;
     
-      
     if (gloading || loading || updating) {
         return <Loading></Loading>;
     }
     if (gerror || error || updateError) {
-        errorElement =<p>{error?.message} || {gerror?.message} || {updateError?.message}</p>
+        errorElement =<p>{error?.message || gerror?.message || updateError?.message}</p>
     }
 
     if (guser || user) {

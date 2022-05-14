@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSignInWithGoogle,useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
@@ -7,6 +7,9 @@ import Loading from "../../Shared/Loading";
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+
 
     const { register, formState: { errors }, handleSubmit } = useForm();
 
@@ -25,11 +28,11 @@ const Login = () => {
         return <Loading></Loading>;
       }
       if (gerror || error) {
-        errorElement = <small className="text-red-600">{error?.message} || {gerror?.message}</small>
+        errorElement = <small className="text-red-600">{error?.message || gerror?.message}</small>
       }
 
       if (guser || user) {
-        navigate('/appointment')
+        navigate(from, { replace: true })
       }
       
       const onSubmit = data => {
