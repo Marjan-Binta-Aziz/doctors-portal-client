@@ -1,11 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSignInWithGoogle,useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import Loading from "../../Shared/Loading";
 
 const Login = () => {
+  const navigate = useNavigate();
+
     const { register, formState: { errors }, handleSubmit } = useForm();
 
     const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
@@ -23,19 +25,14 @@ const Login = () => {
         return <Loading></Loading>;
       }
       if (gerror || error) {
-        errorElement =<p>{error?.message} || {gerror?.message}</p>
+        errorElement = <small className="text-red-600">{error?.message} || {gerror?.message}</small>
       }
 
       if (guser || user) {
-        return (
-          <div>
-            <p className="text-red-600">Error: {user.email}</p>
-          </div>
-        );
+        navigate('/appointment')
       }
       
       const onSubmit = data => {
-        console.log(data);
         signInWithEmailAndPassword(data.email,data.password);
         }
 
