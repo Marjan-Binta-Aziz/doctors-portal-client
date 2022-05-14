@@ -6,7 +6,7 @@ import phone from "../../assets/icons/phone.svg";
 
 const InfoCard = () => {
   return (
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 pl-6">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 pl-6">
       <Info
         cardTitle="Opening Time"
         bgClass="bg-gradient-to-r from-cyan-500 to-blue-500"

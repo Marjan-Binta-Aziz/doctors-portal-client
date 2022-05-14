@@ -1,8 +1,12 @@
 import { format } from 'date-fns';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
 
 const BookingAppointmentModal = ({treatment,setTreatment, date}) => {
     const {_id,name, slots} = treatment;
+    //automatic username r email ashar jonno
+    const [user, loading, error] = useAuthState(auth);
 
     const handleBooking = e => {
         e.preventDefault();
@@ -22,15 +26,16 @@ const BookingAppointmentModal = ({treatment,setTreatment, date}) => {
             <span>
             <select name='slot' className="select select-secondary w-fit max-w-xs select-sm ml-1">
             {
-                slots.map(slot=><option
+                slots.map((slot, index)=><option
+                key={index}
                 value={slot}
                 >{slot}</option>)
             }
             </select>
             </span>
-            <input type="text" placeholder="Patient Name" className="input input-bordered input-secondary input-sm w-full max-w-xs mt-4" />
+            <input type="text" value={user?.displayName} className="input input-bordered input-secondary input-sm w-full max-w-xs mt-4" disabled readOnly/>
+            <input type="text" value={user?.email} className="input input-bordered input-secondary input-sm w-full max-w-xs mt-4" disabled readOnly/>
             <input type="number" placeholder="Patient Age" className="input input-bordered input-secondary input-sm w-full max-w-xs mt-4" />
-            <input type="text" placeholder="Email Address" className="input input-bordered input-secondary input-sm w-full max-w-xs mt-4" />
             <input type="text" placeholder="Phone Number" className="input input-bordered input-secondary input-sm w-full max-w-xs mt-4" />
             <br />
             <button type='submit' value="Book For" htmlFor="booking-modal" className="btn btn-secondary mt-5">Confirm Appointment</button>
