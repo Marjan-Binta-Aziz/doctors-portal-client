@@ -1,7 +1,7 @@
 import React from "react";
 
 const AvailaibleAppoinment = ({appointment, setTreatment}) => {
-    const {name, slots} = appointment 
+    const {name, slots} = appointment;
     return (
         <div>
         <div className="card lg:max-w-lg bg-base-100 shadow-xl">

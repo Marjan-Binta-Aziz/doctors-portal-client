@@ -29,7 +29,10 @@ const Navbar = () => {
         <Link to="/about">About</Link>
       </li>
       <li>
-        {user ? <button onClick={logout}>Sign Out</button> :<Link to="/login">Login</Link>}
+        {user && <Link to="/dashboard">DashBoard</Link>}
+      </li>
+      <li>
+        {user ? <button className="" onClick={logout}>Sign Out</button> : <Link to="/login">Login</Link>}
       </li>
     </>
   );
@@ -63,7 +66,7 @@ const Navbar = () => {
           </div>
           <Link to="/" className="btn btn-ghost normal-case text-xl">Doctor Portal</Link>
         </div>
-        <div className="navbar-end hidden lg:flex">
+        <div className="navbar hidden lg:flex">
           <ul className="menu menu-horizontal  p-0">{menuItems}</ul>
         </div>
       </div>

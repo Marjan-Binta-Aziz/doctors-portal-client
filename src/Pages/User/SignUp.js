@@ -22,7 +22,7 @@
     }
     if (gerror || error || updateError) {
         errorElement = (
-        <p>{error?.message || gerror?.message || updateError?.message}</p>
+        <p className="m-0 text-red-600">{error?.message || gerror?.message || updateError?.message}</p>
         );
     }
 
@@ -33,9 +33,9 @@
 
     const onSubmit = async (data) => {
         await createUserWithEmailAndPassword(data.email, data.password);
-        await updateProfile({displayName: data.firstName, displayName: data.lastName,});
+        await updateProfile({displayName: data.fname}, {displayName: data.lname});
 
-        console.log(data.firstName);
+        console.log(data,data.fname, data.lname);
     };
 
     return (
@@ -44,15 +44,24 @@
             <div className="card-body">
             <h2 className="text-center text-3xl font-bold">Sign Up</h2>
             <div className="card-actions justify-center">
-                <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="card-actions justify-center"
-                >
+                <form onSubmit={handleSubmit(onSubmit)} className="card-actions justify-center" >
+
+                {/* <input
+                    type="name"
+                    className="input input-bordered input-secondary input-md w-full max-w-xs mt-2"
+                    placeholder="Full Name "
+                    {...register("name", { required: true })}
+                />
+
+                {errors.name?.type === "required" && (
+                    <p className=" m-0 text-red-600">First name is required</p>
+                )} */}
+
                 <input
                     type="name"
                     className="input input-bordered input-secondary input-md w-full max-w-xs mt-2"
                     placeholder="First name "
-                    {...register("firstName", { required: true })}
+                    {...register("fname", { required: true })}
                 />
 
                 {errors.firstName?.type === "required" && (
@@ -63,12 +72,13 @@
                     type="name"
                     className="input input-bordered input-secondary input-md w-full max-w-xs mt-2"
                     placeholder="Last name "
-                    {...register("lastName", { required: true })}
+                    {...register("lname", { required: true })}
                 />
 
                 {errors.lastName && (
                     <p className="m-0 text-red-600">Last name is required</p>
                 )}
+
                 <input
                     type="email"
                     placeholder="Email Address"
