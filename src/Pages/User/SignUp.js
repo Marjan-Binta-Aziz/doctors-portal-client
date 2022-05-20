@@ -28,7 +28,7 @@
 
     if (guser || user) {
         console.log(guser || user);
-        navigate("/appointment");
+        // navigate("/appointment");
     }
 
     const onSubmit = async (data) => {

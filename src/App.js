@@ -8,6 +8,9 @@ import Footer from "./Shared/Footer";
 import Navbar from "./Shared/Navbar/Navbar";
 import SignUp from "./Pages/User/SignUp";
 import RequireAuth from "./Shared/RequireAuth";
+import SideBar from "./Pages/DashBoard/SideBar";
+import MyAppointments from "./Pages/DashBoard/MyAppointments";
+import MyReview from "./Pages/DashBoard/MyReview";
 
 function App() {
   return (
@@ -19,6 +22,15 @@ function App() {
         <Route path="/login" element={<Login></Login>}></Route>
         <Route path="/signup" element={<SignUp></SignUp>}></Route>
         <Route path="/about" element={<About></About>}></Route>
+        <Route path="/dashboard" element={
+          <RequireAuth>
+            <SideBar></SideBar>
+          </RequireAuth>
+        }>
+          {/* nested route */}
+        <Route index element={<MyAppointments></MyAppointments>}></Route>
+        <Route path="myreview" element={<MyReview></MyReview>}></Route>
+        </Route>
         <Route path="/appointment" element={
           <RequireAuth>
             <Appointment></Appointment>

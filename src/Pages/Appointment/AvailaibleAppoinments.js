@@ -18,6 +18,7 @@ const AvailaibleAppoinments = ({date, setDate}) => {
     if (isLoading) {
         <Loading></Loading>
     }
+// --------------------------------------------------------
    /*  //Fetching by old style
         const [appointments, setAppointment] = useState([]);
         useEffect(() =>{
