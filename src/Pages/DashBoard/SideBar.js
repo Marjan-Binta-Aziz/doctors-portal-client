@@ -1,7 +1,12 @@
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, Outlet } from 'react-router-dom';
+import auth from '../../firebase.init';
+import useAdmin from '../../hooks/useAdmin';
 
 const SideBar = () => {
+    const [user] = useAuthState(auth);
+    const [admin] = useAdmin(user);
 return (
 <div>
 <div className="drawer drawer-mobile">
@@ -15,7 +20,7 @@ return (
         <ul className="menu p-4 overflow-y-auto w-60 bg-base-100 text-base-content">
         <li><Link to='/dashboard'>My Appointments</Link></li>
         <li><Link to='/dashboard/myreview'>My Reviews</Link></li>
-        <li><Link to='/dashboard/all-user'>All Users</Link></li>
+        <li>{admin && <Link to='/dashboard/all-user'>All Users</Link>}</li>
         </ul>
     
     </div>
