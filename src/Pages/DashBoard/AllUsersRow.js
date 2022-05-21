@@ -11,13 +11,22 @@ const makeAdmin = () => {
             authorization: `Bearer ${localStorage.getItem('accessToken')}`
         }
     })
-    .then(res => res.json())
+    .then(res => {
+        if (res.status === 403) {
+            Swal.fire({
+                icon: 'error',
+                title: 'You are not an Admin',
+                })
+        }
+        return res.json()})
     .then(data => {
-        refetch();
+        if (data.modifiedCount > 0) {
+            refetch();
         Swal.fire({
             icon: 'success',
             title: 'Successfully Made an Admin',
             })
+        }
     })
 }
 
