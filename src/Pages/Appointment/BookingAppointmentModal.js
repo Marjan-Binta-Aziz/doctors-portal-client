@@ -23,7 +23,7 @@ const BookingAppointmentModal = ({treatment,setTreatment, date, refetch}) => {
             slot,
             patientName: user.displayName,
             gender: e.target.gender.value,
-            patientEmail:user.email,
+            email:user.email,
             patientAge : e.target.patientAge.value,
             phone: e.target.phone.value,
         }

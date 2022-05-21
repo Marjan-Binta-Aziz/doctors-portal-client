@@ -11,6 +11,7 @@ import RequireAuth from "./Shared/RequireAuth";
 import SideBar from "./Pages/DashBoard/SideBar";
 import MyAppointments from "./Pages/DashBoard/MyAppointments";
 import MyReview from "./Pages/DashBoard/MyReview";
+import AllUsers from "./Pages/DashBoard/AllUsers";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           {/* nested route */}
         <Route index element={<MyAppointments></MyAppointments>}></Route>
         <Route path="myreview" element={<MyReview></MyReview>}></Route>
+        <Route path="all-user" element={<AllUsers></AllUsers>}></Route>
         </Route>
         <Route path="/appointment" element={
           <RequireAuth>

@@ -4,6 +4,7 @@
     import auth from "../../firebase.init";
     import { useForm } from "react-hook-form";
     import Loading from "../../Shared/Loading";
+import useToken from "../../hooks/useToken";
     const SignUp = () => {
     const navigate = useNavigate();
 
@@ -14,6 +15,8 @@
     const [createUserWithEmailAndPassword, user, loading, error] = useCreateUserWithEmailAndPassword(auth);
 
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+        const [token] = useToken(user || guser);
 
     let errorElement;
 
@@ -26,9 +29,8 @@
         );
     }
 
-    if (guser || user) {
-        console.log(guser || user);
-        // navigate("/appointment");
+    if (token) {
+        navigate("/appointment");
     }
 
     const onSubmit = async (data) => {

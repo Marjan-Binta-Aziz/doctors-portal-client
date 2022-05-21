@@ -15,6 +15,7 @@ return (
         <ul className="menu p-4 overflow-y-auto w-60 bg-base-100 text-base-content">
         <li><Link to='/dashboard'>My Appointments</Link></li>
         <li><Link to='/dashboard/myreview'>My Reviews</Link></li>
+        <li><Link to='/dashboard/all-user'>All Users</Link></li>
         </ul>
     
     </div>
