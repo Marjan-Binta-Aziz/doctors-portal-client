@@ -55,13 +55,12 @@ const MyAppointments = () => {
                         <td>{myAppointment.treatment}</td>
                         <td>{myAppointment.slot}</td>
                         <td>{myAppointment.date}</td>
-                        <td><button className="btn btn-xs">Delete</button>
-</td>
+                        <td><button className="btn btn-xs">Delete</button></td>
                     </tr> )
                 }
             </tbody>
         </table>
-</div>
+            </div>
     </div>
     );
 };
