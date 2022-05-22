@@ -13,6 +13,7 @@ import MyAppointments from "./Pages/DashBoard/MyAppointments";
 import MyReview from "./Pages/DashBoard/MyReview";
 import AllUsers from "./Pages/DashBoard/AllUsers";
 import RequireAdmin from "./Shared/RequireAdmin";
+import AddDoctors from "./Pages/DashBoard/AddDoctors";
 
 function App() {
   return (
@@ -28,15 +29,12 @@ function App() {
           <RequireAuth>
             <SideBar></SideBar>
           </RequireAuth>
-        }>
-          {/* nested route */}
-        <Route index element={<MyAppointments></MyAppointments>}></Route>
-        <Route path="myreview" element={<MyReview></MyReview>}></Route>
-        <Route path="all-user" element={
-        <RequireAdmin>
-          <AllUsers></AllUsers>
-        </RequireAdmin>}
-        ></Route>
+            }>
+                    {/* nested route */}
+            <Route index element={<MyAppointments></MyAppointments>}></Route>
+            <Route path="myreview" element={<MyReview></MyReview>}></Route>
+            <Route path="all-user" element={<RequireAdmin><AllUsers></AllUsers></RequireAdmin>}></Route>
+            <Route path="addDoctor" element={<RequireAdmin><AddDoctors></AddDoctors></RequireAdmin>}></Route>
         </Route>
         <Route path="/appointment" element={
           <RequireAuth>

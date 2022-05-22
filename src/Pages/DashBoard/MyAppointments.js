@@ -11,15 +11,12 @@ const MyAppointments = () => {
 
   useEffect(() => {
     if (user) {
-      fetch(
-        `https://secure-shelf-72939.herokuapp.com/booking?email=${user.email}`,
-        {
-          method: "GET",
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
-      )
+      fetch(`http://localhost:5000/booking?email=${user.email}`, {
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      })
         .then((res) => {
           if (res.status === 401 || res.status === 403) {
             signOut(auth);

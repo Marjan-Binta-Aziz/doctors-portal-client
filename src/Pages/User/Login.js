@@ -14,21 +14,26 @@ const Login = () => {
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
 
-  const {register, formState: { errors }, handleSubmit,} = useForm();
-  
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
   const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
-  
-  const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
+
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);
 
   const [token] = useToken(guser || user);
-  
+
   let errorElement;
 
-  useEffect(()=>{
+  useEffect(() => {
     if (token) {
-    navigate(from, { replace: true });
-  }
-  },[token, from])
+      navigate(from, { replace: true });
+    }
+  }, [token, from]);
 
   if (gloading || loading) {
     return <Loading></Loading>;
@@ -40,8 +45,6 @@ const Login = () => {
       </small>
     );
   }
-
-  
 
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);
@@ -83,7 +86,7 @@ const Login = () => {
               </>
 
               <input
-                {...register("password", {
+                {...register("text", {
                   required: {
                     value: true,
                     message: "Password required",

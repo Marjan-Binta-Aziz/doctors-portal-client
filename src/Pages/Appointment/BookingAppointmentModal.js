@@ -32,7 +32,7 @@ const BookingAppointmentModal = ({
       phone: e.target.phone.value,
     };
 
-    fetch("https://secure-shelf-72939.herokuapp.com/booking", {
+    fetch("http://localhost:5000/booking", {
       method: "POST",
       headers: {
         "content-type": "application/json",

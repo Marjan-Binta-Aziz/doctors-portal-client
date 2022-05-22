@@ -33,7 +33,7 @@ const Navbar = () => {
         {user && <Link to="/dashboard">DashBoard</Link>}
       </li>
       <li>
-        {user ? <button className="" onClick={logout}>Sign Out</button> : <Link to="/login">Login</Link>}
+        {user ? <button className="" onClick={logout}>Sign Out<small className="bg-red-300 font-semibold p-2 rounded-3xl"> {user.displayName}</small></button> : <Link to="/login">Login</Link>}
       </li>
     </>
   );
