@@ -1,10 +1,10 @@
 import React from 'react';
 import Swal from 'sweetalert2';
 
-const DoctorsRow = ({doctor, index, refetch}) => {
+const DoctorsRow = ({doctor, index, refetch,setDeletingDoctor}) => {
     const {name, specialty, email, img} = doctor;
 
-    const deleteDoctor = email => {
+    /* const deleteDoctor = () => {
         fetch(`http://localhost:5000/doctor/${email}`, {
             method: 'DELETE',
             headers: {
@@ -12,29 +12,53 @@ const DoctorsRow = ({doctor, index, refetch}) => {
                 },
     })
     .then(res => res.json())
+
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+      swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+      })
     .then(data => {
         console.log(data);
+
         if (data.deletedCount) {
-            Swal.fire({
-                icon: 'success',
-                title: 'Delete Successfully'
-            })
+            swalWithBootstrapButtons.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success',
+            )
             refetch();
-        }else{
-            Swal.fire({
-                icon: 'error',
-                title: 'Cancel Successfully'
-            })
+            console.log('Confirm Delete',data.isConfirmed);
+        }else if(
+            data.dismiss === Swal.DismissReason.cancel
+            ){
+            swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your imaginary file is safe :)',
+            'error'
+            )
+            refetch();
+            console.log('Dismiss',data.dismiss);
         }
     })
-    }
+    } */
 
 
     return (
         <tr key={doctor._id}>
         <th>{index + 1}</th>
-        <th><div class="avatar">
-        <div class="w-14 mask mask-squircle">
+        <th><div className="avatar">
+        <div className="w-8 mask mask-squircle">
             <img src={img} alt={name} />
         </div>
         </div></th>
@@ -42,7 +66,7 @@ const DoctorsRow = ({doctor, index, refetch}) => {
         <td>{specialty}</td>
         <td>{email}</td>
         <td>
-        <button onClick={()=> deleteDoctor(email)} className="btn btn-xs btn-error">Remove Doctor</button>
+        <label onClick={()=> setDeletingDoctor(doctor)} htmlFor="delete-confirm-modal" className="btn btn-xs btn-error">Remove Doctor</label>
         </td>
     </tr>
     );

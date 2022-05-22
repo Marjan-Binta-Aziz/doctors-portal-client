@@ -32,7 +32,6 @@ const AddDoctors = () => {
                     name: data.name,
                     email: data.email,
                     specialty: data.specialty,
-                    details: data.details,
                     img: img
                 }
                 //send to database
@@ -117,7 +116,7 @@ const AddDoctors = () => {
                         value: true,
                         message: "Specialization Required",
                     },
-                })}class="select select-success w-full max-w-xs">
+                })}className="select select-success w-full max-w-xs">
                     {
                         appointments.map(appointment=><option
                             key={appointment._id}
@@ -130,7 +129,7 @@ const AddDoctors = () => {
                     
                     </select>
 
-                <textarea 
+ {/*                <textarea 
                     {...register("details")}
                     type="textarea"
                     placeholder="Details"
@@ -142,7 +141,7 @@ const AddDoctors = () => {
                     <p className="m-0 text-red-600">{errors.details.message}</p>
                     )}
                     
-                </>
+                </> */}
 
 
                 <input
@@ -153,7 +152,7 @@ const AddDoctors = () => {
                 />
 
                 {errors.image?.type === "required" && (
-                    <p className=" m-0 text-red-600">Name is required</p>
+                    <p className=" m-0 text-red-600">Image is required</p>
                 )}
 
                 <button
