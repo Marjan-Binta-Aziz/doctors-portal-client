@@ -46,12 +46,9 @@ const SignUp = () => {
 
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
-    await updateProfile(
-      { displayName: data.fname },
-      { displayName: data.lname }
-    );
+    await updateProfile({ displayName: data.name });
 
-    console.log(data, data.fname, data.lname);
+    console.log(data, data.name);
   };
 
   return (
@@ -64,7 +61,7 @@ const SignUp = () => {
               onSubmit={handleSubmit(onSubmit)}
               className="card-actions justify-center"
             >
-              {/* <input
+              <input
                     type="name"
                     className="input input-bordered input-secondary input-md w-full max-w-xs mt-2"
                     placeholder="Full Name "
@@ -73,9 +70,9 @@ const SignUp = () => {
 
                 {errors.name?.type === "required" && (
                     <p className=" m-0 text-red-600">First name is required</p>
-                )} */}
+                )}
 
-              <input
+              {/* <input
                 type="name"
                 className="input input-bordered input-secondary input-md w-full max-w-xs mt-2"
                 placeholder="First name "
@@ -96,7 +93,7 @@ const SignUp = () => {
               {errors.lastName && (
                 <p className="m-0 text-red-600">Last name is required</p>
               )}
-
+ */}
               <input
                 type="email"
                 placeholder="Email Address"
@@ -123,7 +120,7 @@ const SignUp = () => {
               </>
 
               <input
-                {...register("text", {
+                {...register("password", {
                   required: {
                     value: true,
                     message: "Password required",

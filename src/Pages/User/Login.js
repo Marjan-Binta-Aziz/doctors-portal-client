@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import {
-  useSignInWithGoogle,
-  useSignInWithEmailAndPassword,
-} from "react-firebase-hooks/auth";
+import {useSignInWithGoogle,useSignInWithEmailAndPassword,} from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
 import { useForm } from "react-hook-form";
 import Loading from "../../Shared/Loading";
@@ -14,16 +11,11 @@ const Login = () => {
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-  } = useForm();
+  const {register,formState: { errors },handleSubmit,} = useForm();
 
   const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
 
-  const [signInWithEmailAndPassword, user, loading, error] =
-    useSignInWithEmailAndPassword(auth);
+  const [signInWithEmailAndPassword, user, loading, error] = useSignInWithEmailAndPassword(auth);
 
   const [token] = useToken(guser || user);
 
@@ -33,7 +25,7 @@ const Login = () => {
     if (token) {
       navigate(from, { replace: true });
     }
-  }, [token, from]);
+  }, [token]);
 
   if (gloading || loading) {
     return <Loading></Loading>;
@@ -56,10 +48,7 @@ const Login = () => {
         <div className="card-body">
           <h2 className="text-center text-3xl font-bold">LogIn</h2>
           <div className="card-actions justify-center">
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="card-actions justify-center"
-            >
+            <form onSubmit={handleSubmit(onSubmit)} className="card-actions justify-center">
               <input
                 type="email"
                 placeholder="Email Address"
@@ -86,7 +75,7 @@ const Login = () => {
               </>
 
               <input
-                {...register("text", {
+                {...register("password", {
                   required: {
                     value: true,
                     message: "Password required",

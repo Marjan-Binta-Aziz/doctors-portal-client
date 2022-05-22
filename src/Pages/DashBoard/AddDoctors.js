@@ -8,7 +8,7 @@ const AddDoctors = () => {
     const {register,formState: { errors },handleSubmit, reset} = useForm();
 
         // for image storage
-        const imgStorageKey = 'e573e0c5c0213395a3cfb93d8519a7d9'
+        const imgStorageKey = '79400c50a495583eef49533f81104895'
 
 
     const {data: appointments, isLoading} = useQuery('appointment', ()=> fetch('http://localhost:5000/appointment').then(res => res.json()))

@@ -51,7 +51,7 @@ const MyAppointments = () => {
             {myAppointments.map((myAppointment, index) => (
               <tr>
                 <th>{index + 1}</th>
-                <td>{myAppointment.patientName}</td>
+                <td>{myAppointment.name}</td>
                 <td>{myAppointment.treatment}</td>
                 <td>{myAppointment.slot}</td>
                 <td>{myAppointment.date}</td>

@@ -25,7 +25,7 @@ const BookingAppointmentModal = ({
       treatment: name,
       date: formattedDate,
       slot,
-      patientName: user.displayName,
+      name: user.displayName,
       gender: e.target.gender.value,
       email: user.email,
       patientAge: e.target.patientAge.value,

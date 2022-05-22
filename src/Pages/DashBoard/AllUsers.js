@@ -4,13 +4,8 @@ import Loading from "../../Shared/Loading";
 import AllUsersRow from "./AllUsersRow";
 
 const AllUsers = () => {
-  const {
-    data: users,
-    isLoading,
-    error,
-    refetch,
-  } = useQuery("all-user", () =>
-    fetch("http://localhost:5000/all-user", {
+  const { data: users, isLoading, error, refetch,} = useQuery("allUser", () =>
+    fetch("http://localhost:5000/allUser", {
       method: "GET",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
