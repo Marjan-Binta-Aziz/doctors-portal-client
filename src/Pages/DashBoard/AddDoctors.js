@@ -70,7 +70,7 @@ const AddDoctors = () => {
     }
 
     return (
-        <div className="card w-96 bg-base-100 shadow-xl">
+        <div className="overflow-y-auto card w-96 bg-base-100 shadow-xl">
             <h2 className='text-3xl p-3 text-center'>Add A Doctor</h2>
             <form onSubmit={handleSubmit(onSubmit)} className="card-actions justify-center" >
 

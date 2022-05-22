@@ -1,12 +1,13 @@
 import React from "react";
 
 const AvailaibleAppoinment = ({appointment, setTreatment}) => {
-    const {name, slots} = appointment;
+    const {name, slots, price} = appointment;
     return (
         <div>
         <div className="card lg:max-w-lg bg-base-100 shadow-xl">
             <div className="card-body text-center">
             <h2 className="text-center text-2xl font-bold">{name}</h2>
+            <h2 className="text-center text-xl text-blue-500 font-bold">Price: ${price}</h2>
             <p>
                 {
                 slots.length > 0

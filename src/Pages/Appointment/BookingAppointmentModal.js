@@ -10,7 +10,7 @@ const BookingAppointmentModal = ({
   date,
   refetch,
 }) => {
-  const { _id, name, slots } = treatment;
+  const { _id, name, slots, price } = treatment;
   //automatic username r email ashar jonno
   const [user, loading, error] = useAuthState(auth);
 
@@ -23,6 +23,7 @@ const BookingAppointmentModal = ({
     const booking = {
       treatmentId: _id,
       treatment: name,
+      price: price,
       date: formattedDate,
       slot,
       name: user.displayName,
@@ -95,26 +96,34 @@ const BookingAppointmentModal = ({
             <input
               type="text"
               value={user?.displayName}
-              className="input input-bordered input-secondary input-sm w-full max-w-xs mt-4"
+              className="input input-bordered input-secondary input-sm w-fit max-w-xs mt-4"
+              disabled
+              readOnly
+            /> {''}
+            <input
+              type="text"
+              value={user?.email}
+              className="input input-bordered input-secondary input-sm w-fit max-w-xs mt-4"
               disabled
               readOnly
             />
             <input
               type="text"
-              value={user?.email}
-              className="input input-bordered input-secondary input-sm w-full max-w-xs mt-4"
+              value={price}$
+              className="input input-bordered input-secondary input-sm w-44 max-w-xs mt-4"
               disabled
               readOnly
             />
             <select
               name="gender"
               id=""
-              className="select select-sm ml-1 input input-bordered input-secondary input-sm w-full max-w-xs mt-4"
+              className="select select-sm ml-1 input input-bordered input-secondary input-sm w-44 max-w-xs mt-4"
             >
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
             </select>
+
             <input
               type="number"
               name="patientAge"
