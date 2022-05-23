@@ -8,8 +8,9 @@ const CheckoutForm = ({myAppointment}) => {
     const [success, setSuccess] = useState('');
     const [clientSecret, setClientSecret] = useState('');
     const [transactionId, setTransactionId] = useState('');
+    const [processing, setProcessing] = useState(false);
 
-    const { price ,name, email} = myAppointment;
+    const { _id, price ,name, email} = myAppointment;
 
     useEffect(() => {
         fetch('http://localhost:5000/create-payment-intent', {
@@ -48,6 +49,7 @@ const CheckoutForm = ({myAppointment}) => {
         //error
         setCardError(error?.message || '')
         setSuccess('');
+        setProcessing(true);
 
          // confirm card payment
         const { paymentIntent, error: intentError } = await stripe.confirmCardPayment(
@@ -66,14 +68,36 @@ const CheckoutForm = ({myAppointment}) => {
 
         if (intentError) {
             setCardError(intentError?.message);
+            setProcessing(false);
         }
         else {
             setCardError('');
             setTransactionId(paymentIntent.id);
-            console.log(paymentIntent);
             setSuccess('Congrats! Your payment is completed.')
-        }  
+            console.log(paymentIntent);
 
+
+            const payment = {
+                myAppointment: _id,
+                transactionId: paymentIntent.id,
+
+            }
+            fetch(`http://localhost:5000/booking/${_id}`, {
+                method: 'PATCH',
+                headers: {
+                    'content-type': 'application/json',
+                    'authorization': `Bearer ${localStorage.getItem('accessToken')}`
+                },
+                body: JSON.stringify(payment)
+            }).then(res=>res.json())
+            .then(data => {
+                setProcessing(false);
+                console.log(data);
+            })
+
+        }
+        
+        
     }
     
     
