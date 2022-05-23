@@ -7,8 +7,9 @@ const CheckoutForm = ({myAppointment}) => {
     const [cardError, setCardError] = useState('');
     const [success, setSuccess] = useState('');
     const [clientSecret, setClientSecret] = useState('');
+    const [transactionId, setTransactionId] = useState('');
 
-    const { price } = myAppointment;
+    const { price ,name, email} = myAppointment;
 
     useEffect(() => {
         fetch('http://localhost:5000/create-payment-intent', {
@@ -45,12 +46,34 @@ const CheckoutForm = ({myAppointment}) => {
             card
         });
         //error
-    if (error) {
-        console.log(error);
         setCardError(error?.message || '')
         setSuccess('');
-        // setProcessing(true)
-    };
+
+         // confirm card payment
+        const { paymentIntent, error: intentError } = await stripe.confirmCardPayment(
+            clientSecret,
+            {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: name,
+                        email: email
+                    },
+                },
+            },
+        );
+
+
+        if (intentError) {
+            setCardError(intentError?.message);
+        }
+        else {
+            setCardError('');
+            setTransactionId(paymentIntent.id);
+            console.log(paymentIntent);
+            setSuccess('Congrats! Your payment is completed.')
+        }  
+
     }
     
     
@@ -84,7 +107,7 @@ const CheckoutForm = ({myAppointment}) => {
             {
                 success && <div className='text-green-500'>
                     <p>{success}  </p>
-
+                    <p>Transaction Id: <span className="text-red-500 font-bold"><i>{transactionId}</i></span> </p>
                 </div>
             }
         </>
