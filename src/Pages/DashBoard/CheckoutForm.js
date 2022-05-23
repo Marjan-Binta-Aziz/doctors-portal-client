@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 
-const CheckoutForm = ({appointment}) => {
+const CheckoutForm = ({myAppointment}) => {
     const stripe = useStripe();
     const elements = useElements();
     const [cardError, setCardError] = useState('');
     const [success, setSuccess] = useState('');
     const [clientSecret, setClientSecret] = useState('');
 
-    const {  price } = appointment;
+    const { price } = myAppointment;
 
     useEffect(() => {
         fetch('http://localhost:5000/create-payment-intent', {
